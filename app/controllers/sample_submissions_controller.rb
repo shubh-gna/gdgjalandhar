@@ -28,11 +28,22 @@ class SampleSubmissionsController < ApplicationController
       path = @sample_submission.sample.path(style)
       FileUtils.move(path, File.join(File.dirname(path), new_file_name))
     end
-
+    p new_file_name
     @sample_submission.sample_file_name = new_file_name
 
     respond_to do |format|
       if @sample_submission.save
+
+        require 'net/http'
+        source = "http://localhost:5000?name=#{new_file_name}"
+        resp = Net::HTTP.get_response(URI.parse(source))
+        data = resp.body
+        result = JSON.parse(data)
+        p '--------'
+        p result
+        p result["result"]
+
+        @sample_submission.update(sample_response:result["result"])
         format.html { redirect_to sample_submission_url(@sample_submission), notice: "Sample submission was successfully created." }
         format.json { render :index, status: :created, location: @sample_submission }
       else
