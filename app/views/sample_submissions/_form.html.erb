@@ -1,0 +1,24 @@
+<%= bootstrap_form_for(sample_submission) do |form| %>
+  <% if sample_submission.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(sample_submission.errors.count, "error") %> prohibited this sample_submission from being saved:</h2>
+
+      <ul>
+        <% sample_submission.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="w-50 justify-content-center m-auto">
+    <%= form.text_field :name %>
+    <%= form.number_field :age %>
+    <%= form.select :gender, options_for_select(%w[Male Female]), prompt:"Please select Gender" %>
+    <%= form.number_field :mobile %>
+    <%= form.tag.textarea :address,class:"form-control" %>
+
+    <%= form.file_field :sample,accept:".jpg",required:true %>
+    <%= form.submit "Submit",class:"btn btn-warning" %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+<div class="text-center p-5">
+  <h1 class="bg-success p-2 text-white rounded-pill" >Skin Sample submissions</h1>
+  <%= render 'svg' %>
+
+<%= render "form", sample_submission: @sample_submission %>
+
+<br>
+
+<div>
+  <%= link_to "Back to sample submissions", sample_submissions_path, class: "btn btn-primary" %>
+</div>
+</div>

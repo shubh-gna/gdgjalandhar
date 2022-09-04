@@ -1,0 +1,12 @@
+<div class="p-5 d-flex justify-content-center m-auto text-center">
+  <%= link_to "Back to sample submissions", sample_submissions_path,class: "btn btn-primary" %>
+  <%= button_to "Destroy this sample", @sample_submission, method: :delete,class: "btn btn-danger" %>
+</div>
+
+<div class="text-center p-5 fs-1 bg-white rounded">
+  <% if  @sample_submission.sample_response == "Malignant" %>
+    <span class="text-danger">Our Model predict <%= @sample_submission.name %> may suffering from Skin Cancer</span>
+  <% else %>
+    <span class="text-success">Our Model predict <%= @sample_submission.name %> have No Skin Cancer</span>
+  <% end %>
+</div>
